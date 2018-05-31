@@ -1,0 +1,35 @@
+.App-logo {
+    float: left;
+    vertical-align: bottom;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-Header {
+    background-color: #222;
+    height: 80px;
+    padding: 0px;
+    color: white;
+    vertical-align: middle;
+}
+
+.App-title {
+    font-size: 1.5em;
+    float: left;
+    vertical-align: bottom;
+    color: cornflowerblue;
+}
+
+.App-Content {
+    min-height: 600px;
+    padding: 30px;
+}
+
+.App-Footer {
+    text-align: center;
+    height: fit-content;
+}
+
+.login-modal {
+    width: auto;
+}
