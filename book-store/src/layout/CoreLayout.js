@@ -5,8 +5,10 @@ import './CoreLayout.css';
 import {LoginComponent} from "../login/LoginComponent";
 import {BookListComponent} from "../book/BookListComponent";
 import {RegisterComponent} from "../login/RegisterComponent";
-import {UserComponent} from "./UserComponent";
+import {MenuComponent} from "../user/MenuComponent";
 import {BookDetailComponent} from "../book/BookDetailComponent";
+import {CartComponent} from "../user/CartComponent";
+import {AddBookComponent} from "../book/AddBookComponent";
 const { Header, Footer, Content } = Layout;
 const TabPane = Tabs.TabPane;
 
@@ -22,8 +24,14 @@ export class CoreLayout extends React.Component {
         </Button>
     };
 
-    userComponent = (userName, onLogout) => {
-        return <UserComponent userName={userName} onLogout={onLogout}/>
+    userComponent = (userName) => {
+        const onLogout = () => {
+            this.setState({userZone: this.loginComponent()});
+        };
+        const onShowCart = () => {
+            this.addTab('cart', '购物车', <CartComponent/>);
+        };
+        return <MenuComponent userName={userName} onLogout={onLogout} onShowCart={onShowCart}/>
     };
 
     state = {
@@ -33,11 +41,18 @@ export class CoreLayout extends React.Component {
             panes: [{
                 key: 'store',
                 title: '图书列表',
-                content: <BookListComponent onShowDetail={
-                    (id, name) => {
-                        this.addTab(id, name, <BookDetailComponent id={id}/>)
+                content: <BookListComponent
+                    onShowDetail={
+                        (id, name) => {
+                            this.addTab(id, name, <BookDetailComponent id={id}/>)
+                        }
                     }
-                }/>,
+                    addBook={
+                        () => {
+                            this.addTab('addBook', '新增图书', <AddBookComponent/>)
+                        }
+                    }
+                />,
                 closable: false,
             }]
         },
@@ -46,9 +61,21 @@ export class CoreLayout extends React.Component {
 
     removeTab = (targetKey) => {
         const {TabObj} = this.state;
-        console.log('remove tab', targetKey);
+        if (targetKey === TabObj.activeKey) {
+            TabObj.panes.some((value, index) => {
+                if (value.key === targetKey) {
+                    if (index > 0) {
+                        TabObj.activeKey = TabObj.panes[index - 1].key;
+                    }
+                    else if (TabObj.panes.length > 1) {
+                        TabObj.activeKey = TabObj.panes[1].key;
+                    }
+                    return true;
+                }
+                return false;
+            });
+        }
         TabObj.panes = TabObj.panes.filter(pane => pane.key !== targetKey);
-        debugger;
         this.setState({TabObj});
     };
 
@@ -84,9 +111,7 @@ export class CoreLayout extends React.Component {
                 >
                     <LoginComponent onLogin={() => {
                         this.setState({modalVisible: false});
-                        this.setState({userZone: this.userComponent('userName', () => {
-                            this.setState({userZone: this.loginComponent()});
-                            })})
+                        this.setState({userZone: this.userComponent('userName')})
                     }}
                         onRegister={() => {
                             this.setState({modalVisible: false});

@@ -68,6 +68,7 @@ export class BookListComponent extends React.Component {
     ];
 
     render() {
+        const {addBook} = this.props;
         const { selectedRowKeys } = this.state;
         const rowSelection = {
             selectedRowKeys,
@@ -77,7 +78,10 @@ export class BookListComponent extends React.Component {
         return (
             <div>
                 <div style={{ marginBottom: 16 }}>
-                    <Button type="primary" disabled={!hasSelected} >
+                    <Button type="primary" onClick={addBook} style={{ marginLeft: 8}}>
+                        新增图书
+                    </Button>
+                    <Button type="primary" disabled={!hasSelected} style={{ marginLeft: 8}}>
                         加入购物车
                     </Button>
                     <Button type="danger" disabled={!hasSelected} style={{ marginLeft: 8}}>
