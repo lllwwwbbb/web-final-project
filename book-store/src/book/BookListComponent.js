@@ -55,7 +55,11 @@ export class BookListComponent extends React.Component {
         key: 'operation',
         render: (text, record) => {
             return (
-                <Button type="primary" onClick={() => {console.log('查看', record)}}>
+                <Button type="primary" onClick={() => {
+                    console.log('查看', record);
+                    const {onShowDetail} = this.props;
+                    onShowDetail(record.id, record.name);
+                }}>
                     查看详情
                 </Button>
             )

@@ -1,0 +1,8 @@
+.user-menu {
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+    margin-right: 25px;
+    max-width: 150px;
+    height: 30px;
+}

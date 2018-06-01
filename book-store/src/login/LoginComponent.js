@@ -17,6 +17,7 @@ class _LoginComponent extends React.Component {
 
     handleRegister = () => {
         console.log('Register!');
+        this.props.onRegister();
     };
 
     render() {
