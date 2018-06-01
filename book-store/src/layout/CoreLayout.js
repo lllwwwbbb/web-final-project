@@ -9,6 +9,7 @@ import {MenuComponent} from "../user/MenuComponent";
 import {BookDetailComponent} from "../book/BookDetailComponent";
 import {CartComponent} from "../user/CartComponent";
 import {AddBookComponent} from "../book/AddBookComponent";
+import {InfoComponent} from "../user/InfoComponent";
 const { Header, Footer, Content } = Layout;
 const TabPane = Tabs.TabPane;
 
@@ -31,7 +32,15 @@ export class CoreLayout extends React.Component {
         const onShowCart = () => {
             this.addTab('cart', '购物车', <CartComponent/>);
         };
-        return <MenuComponent userName={userName} onLogout={onLogout} onShowCart={onShowCart}/>
+        const onShowInfo = () => {
+            this.addTab('info', '用户信息', <InfoComponent/>)
+        };
+        return <MenuComponent
+            userName={userName}
+            onLogout={onLogout}
+            onShowCart={onShowCart}
+            onShowInfo={onShowInfo}
+        />
     };
 
     state = {

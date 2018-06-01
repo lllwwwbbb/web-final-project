@@ -10,11 +10,14 @@ export class MenuComponent extends React.Component {
     };
 
     menu = () => {
-        const {onLogout, onShowCart} = this.props;
+        const {onLogout, onShowCart, onShowInfo} = this.props;
         return (
             <Menu>
                 <MenuItem>
                     <a onClick={onShowCart}>Shopping Cart</a>
+                </MenuItem>
+                <MenuItem>
+                    <a onClick={onShowInfo}>User Information</a>
                 </MenuItem>
                 <MenuItem>
                     <a onClick={onLogout}>Logout</a>
