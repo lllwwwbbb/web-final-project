@@ -1,4 +1,6 @@
 package com.webbook.example.demo.entity;
+import com.webbook.example.demo.respository.ImgRespository;
+
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 @Entity(name="img")
-public class Img {
+public class Img  {
     @Id
     @GeneratedValue
     private Integer Idimg;
