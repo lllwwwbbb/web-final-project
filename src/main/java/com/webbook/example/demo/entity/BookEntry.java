@@ -1,9 +1,12 @@
 package com.webbook.example.demo.entity;
 
+import com.webbook.example.demo.respository.BookRespository;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.IOException;
 
 @Entity(name = "bookentry")
 public class BookEntry {
@@ -26,7 +29,18 @@ public class BookEntry {
     @Column
     private Integer cartId;
 
-    public int isProperty() {
+    private Book book;
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void initBook() throws IOException {
+        BookRespository bookRespository=null;
+        book=bookRespository.GetBookById(bookId);
+        book.initBook();
+    }
+    public int GetProperty() {
         return property;
     }
 

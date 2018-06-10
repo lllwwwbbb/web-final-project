@@ -87,6 +87,11 @@ public  class Book {
         return content;
     }
 
+    public void initBook() throws IOException {
+       featureImgUrl = this.getFeatureImgUrl();
+       picImgUrl=this.getPicImgUrl();
+    }
+
     public String getFeatureImgUrl() throws IOException {
         ImgRespository imgRespository = null;
         Img image=imgRespository.findFeatureImgByBookId(id);
@@ -101,5 +106,10 @@ public  class Book {
             Urllist[i]=imgs[i].GetUrl();
         }
         return Urllist;
+    }
+
+    public void setPrice(Float price) {
+        BookRespository bookRespository=null;
+        bookRespository.SetPrice(id,price);
     }
 }
