@@ -3,9 +3,10 @@ package com.webbook.example.demo.respository;
 import com.webbook.example.demo.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface BookRespository extends JpaRepository<Book,Integer> {
     /*获取所有图书Id*/
     @Query(value="select id from book",nativeQuery = true)

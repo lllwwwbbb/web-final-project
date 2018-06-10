@@ -9,10 +9,12 @@ import org.springframework.data.jpa.repository.Modifying;
 
 import org.springframework.data.jpa.repository.Query;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
+@Repository
 public interface ImgRespository extends JpaRepository<Img,Integer>{
     /*通过bookId查找封面图片*/
     @Query(value="SELECT * FROM img where bookId=?1 and property=0",nativeQuery = true)

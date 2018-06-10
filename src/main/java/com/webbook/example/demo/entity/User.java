@@ -1,5 +1,6 @@
 package com.webbook.example.demo.entity;
 
+import com.webbook.example.demo.respository.BookentryRespository;
 import com.webbook.example.demo.respository.CartRespository;
 import com.webbook.example.demo.respository.OrderRespository;
 import com.webbook.example.demo.respository.UserRespository;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Entity(name = "user")
@@ -97,6 +99,23 @@ public class User {
         userRespository.ChangePasswd(name,passwd);
     }
 
+    public void AddCart(Integer Bookid,int num){
+        cart.AddBookentry(Bookid,num);
+    }
+    public void Addorder(List<BookEntry> Be, float TotalPrice, Date date) throws IOException {
+        OrderRespository orderRespository=null;
+        Integer NewOrderId=orderRespository.AddOrder(TotalPrice,date,getUserId());
+        Order newOrder=new Order();
+        for (BookEntry b:Be) {
+            newOrder.AddBookEntry(b.getBookId(),b.getBookNum());
+        }
+        newOrder.setDate(date.toString());
+        newOrder.setId(NewOrderId);
+        newOrder.setTotalPrice(TotalPrice);
+        newOrder.setUserId(getUserId());
+        newOrder.initBookEntry();
+        orderList.add(newOrder);
+    }
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
         UserRespository userRespository=null;

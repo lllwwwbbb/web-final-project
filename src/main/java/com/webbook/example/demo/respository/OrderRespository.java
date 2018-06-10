@@ -3,10 +3,12 @@ package com.webbook.example.demo.respository;
 import com.webbook.example.demo.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 
+@Repository
 public interface OrderRespository extends JpaRepository<Order,Integer> {
     //添加order
     @Query(value = "insert into order (TotalPrice,date,UserId) values (?1,?2,?3);" +

@@ -1,12 +1,14 @@
 package com.webbook.example.demo.respository;
 
+import com.sun.org.apache.bcel.internal.generic.Select;
 import com.webbook.example.demo.entity.BookEntry;
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface BookentryRespository extends JpaRepository<BookEntry,Integer> {
     //添加order的BookEntry
     @Query(value = "insert into bookentry (bookId,bookNum,Property,orderId) values(?1,?2,0,?3)",nativeQuery = true)
@@ -38,6 +40,10 @@ public interface BookentryRespository extends JpaRepository<BookEntry,Integer> {
     //通过bookId修改库存信息
     @Query(value = "update bookentry bookNum=?2 where bookId=?1 and Property=2",nativeQuery = true)
     void SetBookNum(Integer BookId,int Num);
+
+    //通过bookId获得库存信息
+    @Query(value="select * from bookentry where bookId=?1 and Property=2;",nativeQuery = true)
+    BookEntry GetBookEntryById(Integer BookId);
 
     //获取所有的库存信息
     @Query(value = "select * from bookentry where Property=2",nativeQuery = true)

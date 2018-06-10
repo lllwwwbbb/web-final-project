@@ -26,12 +26,35 @@ public class Order {
 
     private List<BookEntry> Bookentry;
 
-    public void AddBookEntry(Integer BookId,int BookNum,float price) throws IOException {
+    public void setBookentry(List<BookEntry> bookentry) {
+        Bookentry = bookentry;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        TotalPrice = totalPrice;
+    }
+
+    public void setUserId(Integer userId) {
+        UserId = userId;
+    }
+
+
+    public void AddBookEntry(Integer BookId, int BookNum) throws IOException {
         BookEntry Be=new BookEntry(BookId,BookNum,0,id);
         Be.initBook();
         Bookentry.add(Be);
-        TotalPrice+=price*BookNum;
         BookentryRespository bookentryRespository=null;
+        BookEntry B=bookentryRespository.GetBookEntryById(BookId);
+        int Num=B.getBookNum()-BookNum;
+        bookentryRespository.SetBookNum(BookId,Num);
         bookentryRespository.AddOrderBookEntry(BookId,BookNum,id);
     }
 
