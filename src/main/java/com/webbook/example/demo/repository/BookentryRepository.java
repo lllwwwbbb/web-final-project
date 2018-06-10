@@ -1,15 +1,13 @@
-package com.webbook.example.demo.respository;
+package com.webbook.example.demo.repository;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
 import com.webbook.example.demo.entity.BookEntry;
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface BookentryRespository extends JpaRepository<BookEntry,Integer> {
+public interface BookentryRepository extends JpaRepository<BookEntry,Integer> {
     //添加order的BookEntry
     @Query(value = "insert into bookentry (bookId,bookNum,Property,orderId) values(?1,?2,0,?3)",nativeQuery = true)
     void AddOrderBookEntry(Integer bookId,int bookNum,Integer orderId);

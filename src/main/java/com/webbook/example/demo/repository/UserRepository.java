@@ -1,4 +1,4 @@
-package com.webbook.example.demo.respository;
+package com.webbook.example.demo.repository;
 
 import com.webbook.example.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRespository extends JpaRepository<User,Integer> {
+public interface UserRepository extends JpaRepository<User,Integer> {
     /*通过用户名获取密码*/
     @Query(value = "select passwd from user where name=?1",nativeQuery = true)
     String GetpasswdByName(String Name);

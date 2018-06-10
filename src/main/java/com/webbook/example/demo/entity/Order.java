@@ -1,6 +1,6 @@
 package com.webbook.example.demo.entity;
 
-import com.webbook.example.demo.respository.BookentryRespository;
+import com.webbook.example.demo.repository.BookentryRepository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,16 +51,16 @@ public class Order {
         BookEntry Be=new BookEntry(BookId,BookNum,0,id);
         Be.initBook();
         Bookentry.add(Be);
-        BookentryRespository bookentryRespository=null;
-        BookEntry B=bookentryRespository.GetBookEntryById(BookId);
+        BookentryRepository bookentryRepository =null;
+        BookEntry B= bookentryRepository.GetBookEntryById(BookId);
         int Num=B.getBookNum()-BookNum;
-        bookentryRespository.SetBookNum(BookId,Num);
-        bookentryRespository.AddOrderBookEntry(BookId,BookNum,id);
+        bookentryRepository.SetBookNum(BookId,Num);
+        bookentryRepository.AddOrderBookEntry(BookId,BookNum,id);
     }
 
     public void initBookEntry() throws IOException {
-        BookentryRespository bookentryRespository=null;
-        Bookentry=bookentryRespository.GetBookEntryByOrderId(id);
+        BookentryRepository bookentryRepository =null;
+        Bookentry= bookentryRepository.GetBookEntryByOrderId(id);
         for (BookEntry be:Bookentry) {
             be.initBook();
         }

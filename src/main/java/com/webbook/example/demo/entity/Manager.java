@@ -1,8 +1,8 @@
 package com.webbook.example.demo.entity;
 
-import com.webbook.example.demo.respository.BookRespository;
-import com.webbook.example.demo.respository.BookentryRespository;
-import com.webbook.example.demo.respository.ImgRespository;
+import com.webbook.example.demo.repository.BookRepository;
+import com.webbook.example.demo.repository.BookentryRepository;
+import com.webbook.example.demo.repository.ImgRepository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,18 +26,18 @@ public class Manager {
     private List<BookEntry> BookEntryList;
 
     public void initBookEntryList() throws IOException {
-        BookentryRespository bookentryRespository=null;
-        BookEntryList=bookentryRespository.GetAll();
+        BookentryRepository bookentryRepository =null;
+        BookEntryList= bookentryRepository.GetAll();
         for (BookEntry be:BookEntryList) {
             be.initBook();
         }
     }
 
     public void AddNewBook(String name,float price,String authorName,String publishName,String detail_list,String Abstract,String content,String authorIntroduction,int num) throws IOException {
-        BookRespository bookRespository=null;
-        Integer BookId=bookRespository.AddBook(name, price, authorName, publishName, detail_list, Abstract, content, authorIntroduction);
-        BookentryRespository bookentryRespository=null;
-        bookentryRespository.InsertStock(BookId,num);
+        BookRepository bookRepository =null;
+        Integer BookId= bookRepository.AddBook(name, price, authorName, publishName, detail_list, Abstract, content, authorIntroduction);
+        BookentryRepository bookentryRepository =null;
+        bookentryRepository.InsertStock(BookId,num);
         BookEntry be=new BookEntry(BookId,num);
         be.initBook();
         BookEntryList.add(be);
@@ -46,8 +46,8 @@ public class Manager {
         for (BookEntry be:BookEntryList){
             if(be.getBookId()==BookId)
                 be.setBookNum(Num);
-                BookentryRespository bookentryRespository=null;
-                bookentryRespository.SetBookNum(BookId,Num);
+                BookentryRepository bookentryRepository =null;
+                bookentryRepository.SetBookNum(BookId,Num);
         }
     }
 
@@ -64,8 +64,8 @@ public class Manager {
         return null;
     }
     public List<BookEntry> SearchByName(String Name){
-        BookRespository bookRespository=null;
-        List<Integer> BookIdList=bookRespository.SearchByName(Name);
+        BookRepository bookRepository =null;
+        List<Integer> BookIdList= bookRepository.SearchByName(Name);
         List<BookEntry> result=null;
         for(Integer id:BookIdList){
             result.add(GetById(id));
@@ -86,11 +86,11 @@ public class Manager {
     }
     /*添加图书*/
     public void AddBook(String name,float price,String authorName,String publishName,String detail_list,String Abstract,String content,String authorIntroduction,String Url){
-        BookRespository bookRespository=null;
-        Integer bookId=bookRespository.AddBook(name,price,authorName,publishName,detail_list,Abstract,content,authorIntroduction);
+        BookRepository bookRepository =null;
+        Integer bookId= bookRepository.AddBook(name,price,authorName,publishName,detail_list,Abstract,content,authorIntroduction);
         Img image=new Img(bookId,false,Url);
-        ImgRespository imgRespository=null;
-        imgRespository.InsertPicForBook(bookId,image.getData());
+        ImgRepository imgRepository =null;
+        imgRepository.InsertPicForBook(bookId,image.getData());
     }
 
     public void deleteBook(Integer BookId){

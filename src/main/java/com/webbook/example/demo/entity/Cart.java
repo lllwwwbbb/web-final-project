@@ -1,6 +1,6 @@
 package com.webbook.example.demo.entity;
 
-import com.webbook.example.demo.respository.BookentryRespository;
+import com.webbook.example.demo.repository.BookentryRepository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,14 +28,14 @@ public class Cart {
     }
 
     public void initBookentry(){
-        BookentryRespository bookentryRespository=null;
-        Bookentry=bookentryRespository.GetBookEntryByCartId(id);
+        BookentryRepository bookentryRepository =null;
+        Bookentry= bookentryRepository.GetBookEntryByCartId(id);
     }
     public void AddBookentry(Integer BookId,int Num){
         BookEntry Be=new BookEntry(BookId,Num,1,id);
         Bookentry.add(Be);
-        BookentryRespository bookentryRespository=null;
-        bookentryRespository.AddCartBookEntry(BookId,Num,id);
+        BookentryRepository bookentryRepository =null;
+        bookentryRepository.AddCartBookEntry(BookId,Num,id);
     }
 
     public void deleteBookEntry(Integer BookId){
@@ -43,8 +43,8 @@ public class Cart {
             if(be.getBookId()==BookId)
                 Bookentry.remove(be);
         }
-        BookentryRespository bookentryRespository=null;
-        bookentryRespository.DeleteCartBookByBookId(BookId);
+        BookentryRepository bookentryRepository =null;
+        bookentryRepository.DeleteCartBookByBookId(BookId);
     }
     public void setCurTotalPrice(float curTotalPrice) {
         CurTotalPrice = curTotalPrice;

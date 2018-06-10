@@ -1,4 +1,4 @@
-package com.webbook.example.demo.respository;
+package com.webbook.example.demo.repository;
 
 import com.webbook.example.demo.entity.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartRespository extends JpaRepository<Cart,Integer> {
+public interface CartRepository extends JpaRepository<Cart,Integer> {
     //添加购物车
     @Query(value = "insert if not exist into cart(UserId)values(?1);",nativeQuery = true)
     void AddCart(Integer UserId);

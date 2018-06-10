@@ -1,5 +1,5 @@
 package com.webbook.example.demo.entity;
-import com.webbook.example.demo.respository.ImgRespository;
+import com.webbook.example.demo.repository.ImgRepository;
 
 import javax.imageio.ImageIO;
 import javax.persistence.Column;
@@ -76,8 +76,8 @@ public class Img  {
     }
 
     public void SaveToDB(){
-        ImgRespository imgRespository=null;
-        imgRespository.InsertPicForBook(bookId,data);
+        ImgRepository imgRepository =null;
+        imgRepository.InsertPicForBook(bookId,data);
     }
     @Override
 

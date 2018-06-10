@@ -1,7 +1,7 @@
 package com.webbook.example.demo.entity;
 
-import com.webbook.example.demo.respository.BookRespository;
-import com.webbook.example.demo.respository.BookentryRespository;
+import com.webbook.example.demo.repository.BookRepository;
+import com.webbook.example.demo.repository.BookentryRepository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,8 +37,8 @@ public class BookEntry {
     }
 
     public void initBook() throws IOException {
-        BookRespository bookRespository=null;
-        book=bookRespository.GetBookById(bookId);
+        BookRepository bookRepository =null;
+        book= bookRepository.GetBookById(bookId);
         book.initBook();
     }
     public int GetProperty() {
@@ -62,8 +62,8 @@ public class BookEntry {
     }
 
     public void setBookNum(int num){
-        BookentryRespository bookentryRespository=null;
-        bookentryRespository.SetBookNum(bookId,num);
+        BookentryRepository bookentryRepository =null;
+        bookentryRepository.SetBookNum(bookId,num);
         bookNum=num;
     }
 

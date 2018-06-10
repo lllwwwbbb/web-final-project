@@ -1,9 +1,8 @@
 package com.webbook.example.demo.entity;
 
-import com.webbook.example.demo.respository.BookentryRespository;
-import com.webbook.example.demo.respository.CartRespository;
-import com.webbook.example.demo.respository.OrderRespository;
-import com.webbook.example.demo.respository.UserRespository;
+import com.webbook.example.demo.repository.CartRepository;
+import com.webbook.example.demo.repository.OrderRepository;
+import com.webbook.example.demo.repository.UserRepository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,13 +55,13 @@ public class User {
     }
 
     public void init() throws IOException {
-        CartRespository cartRespository=null;
-        CartId=cartRespository.GetCartId(UserId);
-        cart=cartRespository.getOne(CartId);
-        OrderRespository orderRespository=null;
-        OrderIdList=orderRespository.GetOrderListByUserId(UserId);
+        CartRepository cartRepository =null;
+        CartId= cartRepository.GetCartId(UserId);
+        cart= cartRepository.getOne(CartId);
+        OrderRepository orderRepository =null;
+        OrderIdList= orderRepository.GetOrderListByUserId(UserId);
         for(Integer id:OrderIdList){
-            Order order=orderRespository.getOne(id);
+            Order order= orderRepository.getOne(id);
             order.initBookEntry();
             orderList.add(order);
         }
@@ -89,22 +88,22 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
-        UserRespository userRespository=null;
-        userRespository.ChangeAddress(name,address);
+        UserRepository userRepository =null;
+        userRepository.ChangeAddress(name,address);
     }
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
-        UserRespository userRespository=null;
-        userRespository.ChangePasswd(name,passwd);
+        UserRepository userRepository =null;
+        userRepository.ChangePasswd(name,passwd);
     }
 
     public void AddCart(Integer Bookid,int num){
         cart.AddBookentry(Bookid,num);
     }
     public void Addorder(List<BookEntry> Be, float TotalPrice, Date date) throws IOException {
-        OrderRespository orderRespository=null;
-        Integer NewOrderId=orderRespository.AddOrder(TotalPrice,date,getUserId());
+        OrderRepository orderRepository =null;
+        Integer NewOrderId= orderRepository.AddOrder(TotalPrice,date,getUserId());
         Order newOrder=new Order();
         for (BookEntry b:Be) {
             newOrder.AddBookEntry(b.getBookId(),b.getBookNum());
@@ -118,7 +117,7 @@ public class User {
     }
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
-        UserRespository userRespository=null;
-        userRespository.ChangePhone(name,phoneNum);
+        UserRepository userRepository =null;
+        userRepository.ChangePhone(name,phoneNum);
     }
 }

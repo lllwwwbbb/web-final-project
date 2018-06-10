@@ -1,19 +1,13 @@
 package com.webbook.example.demo.entity;
 
-import com.webbook.example.demo.respository.BookRespository;
-import com.webbook.example.demo.respository.ImgRespository;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import com.webbook.example.demo.repository.BookRepository;
+import com.webbook.example.demo.repository.ImgRepository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
 @Entity(name = "book")
 public  class Book {
@@ -93,14 +87,14 @@ public  class Book {
     }
 
     public String getFeatureImgUrl() throws IOException {
-        ImgRespository imgRespository = null;
-        Img image=imgRespository.findFeatureImgByBookId(id);
+        ImgRepository imgRepository = null;
+        Img image= imgRepository.findFeatureImgByBookId(id);
         return image.GetUrl();
     }
 
     public String[] getPicImgUrl() throws IOException {
-        ImgRespository imgRespository = null;
-        Img[] imgs=imgRespository.findAllPicByBookId(id);
+        ImgRepository imgRepository = null;
+        Img[] imgs= imgRepository.findAllPicByBookId(id);
         String []Urllist=null;
         for(int i=0;i<imgs.length;i++){
             Urllist[i]=imgs[i].GetUrl();
@@ -109,7 +103,7 @@ public  class Book {
     }
 
     public void setPrice(Float price) {
-        BookRespository bookRespository=null;
-        bookRespository.SetPrice(id,price);
+        BookRepository bookRepository =null;
+        bookRepository.SetPrice(id,price);
     }
 }

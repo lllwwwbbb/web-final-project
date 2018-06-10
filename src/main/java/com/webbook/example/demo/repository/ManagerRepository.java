@@ -1,4 +1,4 @@
-package com.webbook.example.demo.respository;
+package com.webbook.example.demo.repository;
 
 import com.webbook.example.demo.entity.Manager;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ManagerRespository extends JpaRepository<Manager,Integer> {
+public interface ManagerRepository extends JpaRepository<Manager,Integer> {
     /*通过用户名获取密码*/
     @Query(value = "select Passwd from manager where UserName=?1",nativeQuery = true)
     String GetPasswdByName(String name);
