@@ -1,6 +1,7 @@
 package com.webbook.example.demo.entity;
 
 import com.webbook.example.demo.respository.BookRespository;
+import com.webbook.example.demo.respository.BookentryRespository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,6 +59,12 @@ public class BookEntry {
 
     public Integer getOrderId() {
         return orderId;
+    }
+
+    public void setBookNum(int num){
+        BookentryRespository bookentryRespository=null;
+        bookentryRespository.SetBookNum(bookId,num);
+        bookNum=num;
     }
 
     BookEntry(Integer bookId,int bookNum, int property,Integer integer){

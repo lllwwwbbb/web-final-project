@@ -39,4 +39,8 @@ public interface BookentryRespository extends JpaRepository<BookEntry,Integer> {
     @Query(value = "update bookentry bookNum=?2 where bookId=?1 and Property=2",nativeQuery = true)
     void SetBookNum(Integer BookId,int Num);
 
+    //获取所有的库存信息
+    @Query(value = "select * from bookentry where Property=2",nativeQuery = true)
+    List<BookEntry> GetAll();
+
 }

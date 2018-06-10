@@ -22,6 +22,6 @@ public interface BookRespository extends JpaRepository<Book,Integer> {
 
     /*添加图书*/
     @Query(value = "insert into book (name,price,authorName,publishName,detail_list,abstract,content,authorIntroduction) values (?1,?2,?3,?4,?5,?6?7?8);" +
-            "select id from book where name=?1 and price=?2 and authorName=?3",nativeQuery = true)
+            "select id from book where name=?1 and price=?2 and authorName=?3;select last_insert_id();",nativeQuery = true)
     Integer AddBook(String name,float price,String authorName,String publishName,String detail_list,String Abstract,String content,String authorIntroduction);
 }
