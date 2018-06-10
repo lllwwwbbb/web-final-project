@@ -19,4 +19,9 @@ public interface BookRespository extends JpaRepository<Book,Integer> {
     /*返回搜索结果Id*/
     @Query(value="select id from book where name=%?1%",nativeQuery = true)
     List<Integer> SearchByName(String name);
+
+    /*添加图书*/
+    @Query(value = "insert into book (name,price,authorName,publishName,detail_list,abstract,content,authorIntroduction) values (?1,?2,?3,?4,?5,?6?7?8);" +
+            "select id from book where name=?1 and price=?2 and authorName=?3",nativeQuery = true)
+    Integer AddBook(String name,float price,String authorName,String publishName,String detail_list,String Abstract,String content,String authorIntroduction);
 }

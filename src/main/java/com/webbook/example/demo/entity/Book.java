@@ -8,12 +8,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@Entity(name = "book")
 public  class Book {
     @Id
     @GeneratedValue

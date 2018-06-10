@@ -1,6 +1,7 @@
 package com.webbook.example.demo.entity;
 import com.webbook.example.demo.respository.ImgRespository;
 
+import javax.imageio.ImageIO;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -8,9 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 
 import javax.persistence.Id;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
 @Entity(name="img")
 public class Img  {
@@ -22,12 +22,20 @@ public class Img  {
     private Integer bookId;
 
     @Column
-    private Boolean property;
+    private Boolean property;//0是指封面图片，1是指详情图片
 
     @Column
     private byte[] data;
 
-
+    Img(Integer bookId,boolean property,String url){
+        this.bookId=bookId;
+        this.property=property;
+        try {
+            this.SetDataFromUrl(url);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public Integer getId() {
 
@@ -50,8 +58,27 @@ public class Img  {
         return url;
     }
 
+    public byte[] getData() {
+        return data;
+    }
 
+    public void SetDataFromUrl(String Url) throws FileNotFoundException {
+        File f = new File(Url);
+        BufferedImage bi;
+        try {
+            bi = ImageIO.read(f);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bi, "jpg", baos);  //经测试转换的图片是格式这里就什么格式，否则会失真
+            data= baos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void SaveToDB(){
+        ImgRespository imgRespository=null;
+        imgRespository.InsertPicForBook(bookId,data);
+    }
     @Override
 
     public String toString(){

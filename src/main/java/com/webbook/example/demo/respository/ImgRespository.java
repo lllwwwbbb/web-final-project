@@ -27,6 +27,6 @@ public interface ImgRespository extends JpaRepository<Img,Integer>{
     void deleteAllImgByBookId(Integer BookId);
 
     /*添加某书的封面图片*/
-    @Query(value = "insert into img (bookId,property,data) values (?1,?2,?3)",nativeQuery = true)
-    void InsertPicForBook(Integer bookId,boolean property,byte[] data);
+    @Query(value = "insert into img (bookId,property,data) values (?1,0,?2)",nativeQuery = true)
+    void InsertPicForBook(Integer bookId,byte[] data);
 }
