@@ -26,8 +26,9 @@ public interface UserRespository extends JpaRepository<User,Integer> {
     boolean ChangeAddress(String Name,String NewAddress);
 
     /*添加用户*/
-    @Query(value = "insert into user (name,passwd,phoneNum,address) values (?1,?2,?3,?4)",nativeQuery = true)
-    boolean AddUser(String name,String passwd,String phoneNum,String adress);
+    @Query(value = "insert into user (name,passwd,phoneNum,address) values (?1,?2,?3,?4);" +
+            "select last_insert_id();",nativeQuery = true)
+    Integer AddUser(String name,String passwd,String phoneNum,String adress);
 
     /*删除用户*/
     @Query(value = "delete from user where name=?1",nativeQuery = true)

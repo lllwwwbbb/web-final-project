@@ -18,7 +18,7 @@ public class BookEntry {
     private int bookNum;
 
     @Column
-    private boolean property;//false为order的bookentry；true为cart的bookentry
+    private int property;//0为order的bookentry；1为cart的bookentry,2为库存
 
     @Column
     private Integer orderId;
@@ -26,7 +26,7 @@ public class BookEntry {
     @Column
     private Integer cartId;
 
-    public boolean isProperty() {
+    public int isProperty() {
         return property;
     }
 
@@ -46,13 +46,18 @@ public class BookEntry {
         return orderId;
     }
 
-    BookEntry(Integer bookId,int bookNum, boolean property,Integer integer){
+    BookEntry(Integer bookId,int bookNum, int property,Integer integer){
         this.bookId=bookId;
         this.bookNum=bookNum;
         this.property=property;
-        if(property)
+        if(property==0)
             orderId=integer;
         else
             cartId=integer;
+    }
+    BookEntry(Integer bookId,int bookNum){
+        this.bookId=bookId;
+        this.bookNum=bookNum;
+        this.property=2;
     }
 }
