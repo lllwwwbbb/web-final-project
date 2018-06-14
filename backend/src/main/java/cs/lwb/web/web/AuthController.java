@@ -5,15 +5,13 @@ import cs.lwb.web.entity.Customer;
 import cs.lwb.web.repository.AdminRepository;
 import cs.lwb.web.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/auth")
+@CrossOrigin
 public class AuthController {
 
     @Autowired
@@ -35,7 +33,7 @@ public class AuthController {
         }
         else if (optionalCustomer.isPresent()) {
             if (optionalCustomer.get().getPassword().equals(password)) {
-                ret = "Customer";
+                ret = userName;
             }
         }
 

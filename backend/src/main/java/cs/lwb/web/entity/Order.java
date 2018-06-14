@@ -1,6 +1,7 @@
 package cs.lwb.web.entity;
 
 import org.aspectj.weaver.ast.Or;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +12,8 @@ import java.util.List;
 @Entity
 public class Order {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
     private Double totalPrice;
     private String date;

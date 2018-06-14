@@ -1,5 +1,7 @@
 package cs.lwb.web.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,8 +9,8 @@ import javax.persistence.Id;
 @Entity
 public class Admin {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
     private String userName;
     private String password;

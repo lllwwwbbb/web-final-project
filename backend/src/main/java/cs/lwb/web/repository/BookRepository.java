@@ -10,4 +10,9 @@ public interface BookRepository extends CrudRepository<Book, String> {
 
     @Override
     Optional<Book> findById(String id);
+
+    @Override
+    List<Book> findAll();
+
+    Optional<Book> findByName(String name);
 }

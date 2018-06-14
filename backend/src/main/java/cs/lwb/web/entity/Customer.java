@@ -1,5 +1,6 @@
 package cs.lwb.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,8 +18,10 @@ public class Customer {
     private String email;
     private String phone;
     @OneToOne
+    @JsonIgnore
     private Cart cart;
     @OneToMany
+    @JsonIgnore
     private List<Order> orderList;
 
     public Customer() {}
